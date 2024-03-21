@@ -1,0 +1,87 @@
+
+services:
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    env_file: .env
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRESQL_USER}
+      - POSTGRES_DB=${POSTGRESQL_DB}
+      - POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}
+    networks:
+      - iot_campus_uis
+  
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    networks: 
+      - iot_campus_uis
+  
+  mosquitto:
+    image: eclipse-mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+    networks: 
+      - iot_campus_uis
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  
+  admin:
+    restart: always
+    depends_on:
+      - db
+    build: admin_microservice
+    ports:
+      - 8081:8081
+    environment:
+      - POSTGRESQL_HOST=db
+      - POSTGRESQL_PORT=${POSTGRESQL_PORT}
+      - POSTGRESQL_DB=${POSTGRESQL_DB}
+      - POSTGRESQL_USER=${POSTGRESQL_USER}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - ADMIN_SERVICE_PORT=${ADMIN_SERVICE_PORT}
+    networks:
+      - iot_campus_uis
+  
+  data:
+    restart: always
+    depends_on:
+      - mongo
+      - mosquitto
+    build: data_microservice
+    ports:
+      - 8082:8082
+    environment:
+      - MONGO_HOST=mongo
+      - DATA_SERVICE_PORT=${DATA_SERVICE_PORT}
+      - BROKER_URL=tcp://mosquitto:1883
+    networks:
+      - iot_campus_uis
+  
+  gateway:
+    restart: always
+    build: go_gateway
+    depends_on:
+      - admin
+    ports:
+      - 8080:8080
+    environment:
+      - ADMIN_HOST=http://admin:${ADMIN_SERVICE_PORT}
+      - DATA_HOST=http://data:${DATA_SERVICE_PORT}
+      - GATEWAY_PORT:${GATEWAY_PORT}
+    networks:
+      - iot_campus_uis
+
+
+networks: 
+  iot_campus_uis:
+    driver: bridge
+
+
+
