@@ -78,6 +78,17 @@ services:
     networks:
       - iot_campus_uis
 
+  frontend:
+    restart: always
+    build: frontend_admin
+    depends_on:
+      - admin
+      - gateway
+      - data
+    ports:
+      - 4000:80
+    networks:
+      - iot_campus_uis
 
 networks: 
   iot_campus_uis:
