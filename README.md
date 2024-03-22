@@ -59,4 +59,4 @@ Actualmente están configurados los siguientes métodos para el envío de mensaj
 
 - [@HenryJimenez](https://github.com/Han253)
 - [@GabrielPedraza](https://github.com/chaphe)
-- [@Jathinson] (https://github.com/jathinson)
+- [@Jathinson](https://github.com/jathinson)
