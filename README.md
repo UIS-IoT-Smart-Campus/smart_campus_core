@@ -30,7 +30,7 @@ Repositorio con las versiones de prueba para el core de la plataforma Smart Camp
 
 ## Formato de los mensajes
 
-Los mensajes deben ser enviados al broker usando el tópico **device-messages**, estos mensajes deben estar en formato JSON y contener los siguientes atributos "respetar el nombre de los atributos para el correcto funcionamiento":
+Los mensajes deben ser enviados al broker usando el tópico **device_messages**, estos mensajes deben estar en formato JSON y contener los siguientes atributos "respetar el nombre de los atributos para el correcto funcionamiento":
 
 - **userUUID**: Es el identificador único universal de cada usuario, asignado por la plataforma al momento de registrarse, por el momento puede enviarse un String con el valor que se requiera, a futuro se validará con el microservicio de administración. 
 
