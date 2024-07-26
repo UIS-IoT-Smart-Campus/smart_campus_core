@@ -15,12 +15,12 @@ Repositorio con las versiones de prueba para el core de la plataforma Smart Camp
 
 - **ADMIN MICROSERVICES**: Microservicio programado en JAVA-17/SpringBoot-3 que se encarga de la gestión de datos que representan la infraestructura IoT desplegada, permite administrar modelos, dispositivos y sus propiedades así cómo aplicación, realizar las asociaciones permitidas, crear y acceder mediante usuarios.
 
-- **DATA MICROSERVICES**: Microservicio programado en JAVA-17/SpringBoot-3 que se suscribe al tópico **device-messages** los mensajes que se reciben por este tópico son almacenados en base de datos, también expone una API-EndPoint que permite consultar los mensajes enviados por un dispositivo dado su ID, la URL de este EndPoint debería ser algo cómo: *HOST_BASE_URL/data//deviceMessage/{ID_DEVICE}*
+- **DATA MICROSERVICES**: Microservicio programado en JAVA-17/SpringBoot-3 que se suscribe al tópico **device_messages** los mensajes que se reciben por este tópico son almacenados en base de datos, también expone una API-EndPoint que permite consultar los mensajes enviados por un dispositivo dado su ID, la URL de este EndPoint debería ser algo cómo: *HOST_BASE_URL/data//deviceMessage/{ID_DEVICE}*
 
 
 ### Comunicación
 
-- **ECLIPSE MOSQUITTO**: Broker MQTT que permite él envío de mensajes hacía el servicio de datos, expone el puerto 1883, el tópico para envío de datos desde los dispositivos es **device-messages**.
+- **ECLIPSE MOSQUITTO**: Broker MQTT que permite él envío de mensajes hacía el servicio de datos, expone el puerto 1883, el tópico para envío de datos desde los dispositivos es **device_messages**.
 
 - **GoGateway**: Un Gateway de pruebas liviano programado en Go que permite la comunicación hacía los microservicios, se expone en el puerto 8080 del HOST.
 
