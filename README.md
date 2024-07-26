@@ -51,7 +51,7 @@ El despliegue se debe realizar mediante Docker-Compose una vez descargado el rep
 ### Métodos de envío de mensajes
 
 Actualmente están configurados los siguientes métodos para el envío de mensajes:
-- **MQTT**: se pueden publicar mensajes desde dispositivos en la plataforma mediante el tópico *device-messages* siguiendo el formato de los mensajes especificado anteriormente.
+- **MQTT**: se pueden publicar mensajes desde dispositivos en la plataforma mediante el tópico *device_messages* siguiendo el formato de los mensajes especificado anteriormente.
 
 
 
