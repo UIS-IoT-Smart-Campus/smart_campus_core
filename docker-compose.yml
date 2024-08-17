@@ -5,8 +5,8 @@ services:
     restart: always
     shm_size: 128mb
     env_file: .env
-    #ports:
-    #  - 5432:5432
+    ports:
+     - 5432:5432
     environment:
       - POSTGRES_USER=${POSTGRESQL_USER}
       - POSTGRES_DB=${POSTGRESQL_DB}
@@ -17,8 +17,8 @@ services:
   mongo:
     image: mongo
     restart: always
-    #ports:
-    #  - 27017:27017
+    ports:
+     - 27017:27017
     networks: 
       - iot_campus_uis
   
@@ -51,12 +51,13 @@ services:
   
   data:
     restart: always
+    env_file: .env
     depends_on:
       - mongo
       - mosquitto
     build: data_microservice
-    #ports:
-    #  - 8082:8082
+    ports:
+     - 8082:8082
     environment:
       - MONGO_HOST=mongo
       - DATA_SERVICE_PORT=${DATA_SERVICE_PORT}
@@ -74,7 +75,7 @@ services:
     environment:
       - ADMIN_HOST=http://admin:${ADMIN_SERVICE_PORT}
       - DATA_HOST=http://data:${DATA_SERVICE_PORT}
-      - GATEWAY_PORT:${GATEWAY_PORT}
+      - GATEWAY_PORT=${GATEWAY_PORT}
     networks:
       - iot_campus_uis
 
